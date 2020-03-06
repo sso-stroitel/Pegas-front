@@ -1,0 +1,6 @@
+<label class='label' [ngStyle]="style">
+  {{label}}
+  <input [disabled]=isDisabled [ngStyle]="inputStyle" (change)="inputChange.emit($event)" [value]="value" [type]="type"
+         class='input'/>
+  <span class="validation-text">{{validText}}</span>
+</label>

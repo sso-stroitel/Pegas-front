@@ -1,0 +1,22 @@
+<div class='auth'>
+  <div class="auth__title">{{title}}</div>
+  <form [formGroup]="form" class="auth__form">
+    <ng-container *ngIf="!(authService.isSignIn$ | async)">
+      <div class='auth__subj'>
+        <div class='auth__subj-label'>Кто вы</div>
+        <div class='auth__subj-list'>
+          <app-auth-button (radioChange)="radioChange($event)" name="children" title="Школьник" color="#B1B1B1"
+                           width="97"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" name="educationInstitution" title="Школа" color="#F02122"
+                           width="97"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" name="parent" title="Родитель" color="#FFA763"
+                           width="97"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" name="tourOperator" title="Туроператор" color="#36A560"
+                           width="100%"></app-auth-button>
+        </div>
+      </div>
+    </ng-container>
+    <app-input formControlName="email"  label='Email' name='email'></app-input>
+    <app-input formControlName="password" label='Пароль' name='pass' type='password'></app-input>
+  </form>
+</div>
