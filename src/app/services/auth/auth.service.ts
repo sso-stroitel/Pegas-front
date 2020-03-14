@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor() { }
 
-  toggleAuthView(value: boolean): void {
+  public toggleAuthView(value: boolean): void {
     this.isSignIn$.next(value);
   }
 }

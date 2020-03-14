@@ -17,12 +17,18 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
      this.form = this.fb.group({
        email: ['', [Validators.required, Validators.email]],
-       password: ['', [Validators.required, Validators.minLength(6)]]
+       password: ['', [Validators.required, Validators.minLength(6)]],
+       confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
      });
+     this.form.valueChanges.subscribe(data => console.log('>> lal', data))
   }
 
   radioChange(ev) {
     console.log(ev)
+  }
+
+  onSubmit() {
+    console.log(this.form.controls);
   }
 
   inputChange(ev) {

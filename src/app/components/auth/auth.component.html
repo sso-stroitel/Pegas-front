@@ -16,7 +16,34 @@
         </div>
       </div>
     </ng-container>
-    <app-input formControlName="email"  label='Email' name='email'></app-input>
-    <app-input formControlName="password" label='Пароль' name='pass' type='password'></app-input>
+    <app-input formControlName="email" [options]="{label: 'Email', name: 'email'}"></app-input>
+    <app-input formControlName="password" [options]="{label: 'Пароль', name: 'pass', type: 'password'}"></app-input>
+    <ng-container *ngIf="authService.isSignIn$ | async; else signUp">
+      <div class='auth__social'>
+        <div class="auth__social-title">Войти через соц. сеть</div>
+        <div class="auth__social-list">
+          <img src="static/vk.png" alt=""/>
+          <img src="static/fb.png" alt=""/>
+          <img src="static/gm.png" alt=""/>
+        </div>
+      </div>
+      <div class='auth__bottom-new'>Я новый пользователь</div>
+      <div [ngStyle]="(authService.isSignIn$ | async) ? {} : {justifyContent: 'flex-end'}" class='auth__bottom'>
+        <div class='auth__bottom-new' (click)="authService.toggleAuthView(false)">Я новый пользователь</div>
+        <div class="auth__bottom-text">или зарегистрироваться через соц сеть</div>
+        <div class="auth__bottom-btns">
+          <div class="auth__social-list">
+            <img src="/assets/img/vk.png" alt=""/>
+            <img src="assets/img/fb.png" alt=""/>
+            <img src="/assets/img/gm.png" alt=""/>
+          </div>
+          <app-button [options]="{type: 'submit', title: 'Создать аккаунт'}"></app-button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #signUp>
+      <app-input formControlName="confirmPassword"
+                 [options]="{label: 'Подтверждение пароля', name: 'confirmPassword', type: 'password'}"></app-input>
+    </ng-template>
   </form>
 </div>
