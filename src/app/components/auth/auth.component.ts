@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {JwtRegAuthControllerService} from '../../api/services';
 
 @Component({
   selector: 'app-auth',
@@ -21,6 +22,7 @@ export class AuthComponent implements OnInit {
        confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
      });
      this.form.valueChanges.subscribe(data => console.log('>> lal', data))
+
   }
 
   radioChange(ev) {

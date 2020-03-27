@@ -1,6 +1,6 @@
 <label class='label' [ngStyle]="options.style">
   {{options.label}}
-  <input [disabled]=isDisabled [ngStyle]="options.inputStyle" (input)="onChange($event.target.value)" [value]="value" [type]="options.type"
+  <input [disabled]=isDisabled [ngStyle]="options.inputStyle" (input)="onChange($event.target.value)" [value]="value" [type]="options.type || 'text'"
          class='input'/>
   <span class="validation-text">{{options.validText}}</span>
 </label>

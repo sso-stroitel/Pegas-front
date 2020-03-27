@@ -1,0 +1,31 @@
+.main {
+  &__entry {
+    display: flex;
+    height: 300px;
+    margin-top: 40px;
+    justify-content: space-between;
+    align-content: center;
+
+    &-item {
+      max-width: 500px;
+    }
+
+    &-title {
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 60px;
+      margin-bottom: 25px;
+    }
+
+    &-subtitle {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 300;
+      max-width: 375px;
+
+      p {
+        margin-bottom: 12px;
+      }
+    }
+  }
+}

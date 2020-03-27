@@ -8,5 +8,5 @@ export interface IInput {
 }
 
 export interface IInputStyle {
-  [key: string]: string;
-};
+  [key: string]: string | number;
+}

@@ -1,49 +1,45 @@
 <div class='auth'>
   <div class="auth__title">{{title}}</div>
-  <form [formGroup]="form" class="auth__form">
+  <form [formGroup]="form">
     <ng-container *ngIf="!(authService.isSignIn$ | async)">
       <div class='auth__subj'>
         <div class='auth__subj-label'>Кто вы</div>
         <div class='auth__subj-list'>
-          <app-auth-button (radioChange)="radioChange($event)" name="children" title="Школьник" color="#B1B1B1"
-                           width="97"></app-auth-button>
-          <app-auth-button (radioChange)="radioChange($event)" name="educationInstitution" title="Школа" color="#F02122"
-                           width="97"></app-auth-button>
-          <app-auth-button (radioChange)="radioChange($event)" name="parent" title="Родитель" color="#FFA763"
-                           width="97"></app-auth-button>
-          <app-auth-button (radioChange)="radioChange($event)" name="tourOperator" title="Туроператор" color="#36A560"
-                           width="100%"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" name="children" title="Школьник" color="#B1B1B1"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" name="educationInstitution" title="Школа" color="#F02122"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" name="parent" title="Родитель" color="#FFA763"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" name="tourOperator" title="Туроператор" color="#36A560"></app-auth-button>
         </div>
       </div>
     </ng-container>
-    <app-input formControlName="email" [options]="{label: 'Email', name: 'email'}"></app-input>
-    <app-input formControlName="password" [options]="{label: 'Пароль', name: 'pass', type: 'password'}"></app-input>
+    <app-input formControlName="email" [options]="{label: 'Email', name: 'email', style: { marginBottom: '25px' }}"></app-input>
+    <app-input formControlName="password" [options]="{label: 'Пароль', name: 'pass', type: 'password', style: { marginBottom: '30px' }}"></app-input>
     <ng-container *ngIf="authService.isSignIn$ | async; else signUp">
-      <div class='auth__social'>
-        <div class="auth__social-title">Войти через соц. сеть</div>
-        <div class="auth__social-list">
-          <img src="static/vk.png" alt=""/>
-          <img src="static/fb.png" alt=""/>
-          <img src="static/gm.png" alt=""/>
-        </div>
+      <div class='auth__row'>
+        <div class="auth__row-title">Войти<br>через соц. сеть</div>
+        <ng-container *ngTemplateOutlet="socialList"></ng-container>
       </div>
-      <div class='auth__bottom-new'>Я новый пользователь</div>
-      <div [ngStyle]="(authService.isSignIn$ | async) ? {} : {justifyContent: 'flex-end'}" class='auth__bottom'>
-        <div class='auth__bottom-new' (click)="authService.toggleAuthView(false)">Я новый пользователь</div>
-        <div class="auth__bottom-text">или зарегистрироваться через соц сеть</div>
-        <div class="auth__bottom-btns">
-          <div class="auth__social-list">
-            <img src="/assets/img/vk.png" alt=""/>
-            <img src="assets/img/fb.png" alt=""/>
-            <img src="/assets/img/gm.png" alt=""/>
-          </div>
-          <app-button [options]="{type: 'submit', title: 'Создать аккаунт'}"></app-button>
-        </div>
+      <div class="auth__row">
+        <div class='auth__row-new' (click)="authService.toggleAuthView(false)">Я новый пользователь</div>
+        <app-button [options]="{type: 'submit', title: 'Войти'}"></app-button>
       </div>
     </ng-container>
     <ng-template #signUp>
       <app-input formControlName="confirmPassword"
                  [options]="{label: 'Подтверждение пароля', name: 'confirmPassword', type: 'password'}"></app-input>
+      <div class="auth__row-title">или зарегистрироваться через соц сеть</div>
+      <div class="auth__row">
+        <ng-container *ngTemplateOutlet="socialList"></ng-container>
+        <app-button [options]="{type: 'submit', title: 'Создать аккаунт'}"></app-button>
+      </div>
     </ng-template>
   </form>
 </div>
+
+<ng-template #socialList>
+  <div class="auth__social-list">
+    <img src="/assets/img/vk.png" alt=""/>
+    <img src="assets/img/fb.png" alt=""/>
+    <img src="/assets/img/gm.png" alt=""/>
+  </div>
+</ng-template>
