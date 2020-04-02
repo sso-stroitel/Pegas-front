@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {JwtRegAuthControllerService} from '../../api/services';
+import {UserRegistrationDto} from '../../api/models/user-registration-dto';
 
 @Component({
   selector: 'app-auth',
@@ -10,6 +10,7 @@ import {JwtRegAuthControllerService} from '../../api/services';
 })
 export class AuthComponent implements OnInit {
   public form: FormGroup;
+  private authTypeUserSelected: UserRegistrationDto['type'];
 
   title = 'Войти в лабораторию';
 
@@ -22,19 +23,13 @@ export class AuthComponent implements OnInit {
        confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
      });
      this.form.valueChanges.subscribe(data => console.log('>> lal', data))
-
   }
 
-  radioChange(ev) {
-    console.log(ev)
+  radioChange({target}) {
+    this.authTypeUserSelected = target.value;
   }
 
   onSubmit() {
-    console.log(this.form.controls);
+    this.authService.postAuthUser(this.form, this.authTypeUserSelected);
   }
-
-  inputChange(ev) {
-    console.log(ev)
-  }
-
 }

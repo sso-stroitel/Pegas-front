@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+type btnName = 'CHILDREN' | 'PARENT' | 'EDUCATION_INSTITUTION' | 'TOUR_OPERATOR';
 
 @Component({
   selector: 'app-auth-button',
@@ -6,8 +7,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrls: ['./auth-button.component.scss']
 })
 export class AuthButtonComponent {
-  @Input() name: string;
+  @Input() name: btnName;
   @Input() title: string;
   @Input() color: string;
+  @Input() checked: boolean;
   @Output() radioChange: EventEmitter<any> = new EventEmitter();
 }

@@ -41,10 +41,11 @@
     }
 
     &-title {
+      width: 190px;
+      margin-bottom: 15px;
       font-size: 14px;
       line-height: 20px;
       color: $gray_2;
-      width: 130px;
     }
 
     &-new {

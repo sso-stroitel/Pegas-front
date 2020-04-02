@@ -4,6 +4,7 @@ import {JwtRegAuthControllerService} from '../../api/services/jwt-reg-auth-contr
 import {UserRegistrationDto} from '../../api/models/user-registration-dto';
 import {JwtResponse} from '../../api/models/jwt-response';
 import {map} from 'rxjs/operators';
+import {FormGroup} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,17 @@ export class AuthService {
 
   public toggleAuthView(value: boolean): void {
     this.isSignIn$.next(value);
+  }
+
+  public postAuthUser(form: FormGroup, selectedType) {
+    console.log(form.getRawValue(), this.isSignIn$.getValue())
+    // TODO костыль нажо поправить на нормальный поток
+    if (this.isSignIn$.getValue()) {
+      this.signInUser(form.getRawValue());
+    } else {
+      const formData = {...form.getRawValue(), type: selectedType};
+      this.signUpUser(formData);
+    }
   }
 
   public signUpUser(user: UserRegistrationDto): Observable<JwtResponse> {

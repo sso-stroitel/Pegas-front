@@ -1,12 +1,12 @@
 <div class='auth'>
   <div class="auth__title">{{title}}</div>
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <ng-container *ngIf="!(authService.isSignIn$ | async)">
       <div class='auth__subj'>
         <div class='auth__subj-label'>Кто вы</div>
         <div class='auth__subj-list'>
-          <app-auth-button (radioChange)="radioChange($event)" name="children" title="Школьник" color="#B1B1B1"></app-auth-button>
-          <app-auth-button (radioChange)="radioChange($event)" name="educationInstitution" title="Школа" color="#F02122"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" [checked]="true" name="children" title="Школьник" color="#B1B1B1"></app-auth-button>
+          <app-auth-button (radioChange)="radioChange($event)" name="school" title="Школа" color="#F02122"></app-auth-button>
           <app-auth-button (radioChange)="radioChange($event)" name="parent" title="Родитель" color="#FFA763"></app-auth-button>
           <app-auth-button (radioChange)="radioChange($event)" name="tourOperator" title="Туроператор" color="#36A560"></app-auth-button>
         </div>
@@ -26,7 +26,7 @@
     </ng-container>
     <ng-template #signUp>
       <app-input formControlName="confirmPassword"
-                 [options]="{label: 'Подтверждение пароля', name: 'confirmPassword', type: 'password'}"></app-input>
+                 [options]="{label: 'Подтверждение пароля', name: 'confirmPassword', type: 'password', style: { marginBottom: '30px' }}"></app-input>
       <div class="auth__row-title">или зарегистрироваться через соц сеть</div>
       <div class="auth__row">
         <ng-container *ngTemplateOutlet="socialList"></ng-container>
